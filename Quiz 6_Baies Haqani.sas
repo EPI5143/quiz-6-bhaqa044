@@ -26,18 +26,18 @@ by EncPatWID;
 		Inpt_emerg=0; *if inpatient OR emerg than = 1, otherwise =0;
 		count=0; *if encounter inpatient = 1, otherwise =0;
 		end;
-	if EncVisitTypeCd='INPT' then do; /*inpatient encounter*/
+	if EncVisitTypeCd='INPT' then do; *inpatient encounter;
 		inpatient=1; 
 		end;
-	if EncVisitTypeCd='EMERG' then do; /*ER encounter*/
+	if EncVisitTypeCd='EMERG' then do; *ER encounter;
 		emerg=1;
 		end;
-	if EncVisitTypeCd in: ('INPT' 'EMERG') then do; /*either inpatient OR ER encounter*/
+	if EncVisitTypeCd in: ('INPT' 'EMERG') then do; *either inpatient OR ER encounter*;
 		Inpt_emerg=1;
 		count=count+1;
 		end;
 	if last.EncPatWID then output;
-	retain inpatient emerg Inpt_emerg count; /*keeping the variables were are interested in */
+	retain inpatient emerg Inpt_emerg count; 
 run;
 
 *frequency tables for questions a-d;
@@ -52,40 +52,40 @@ run;
 The FREQ Procedure
 
 inpatient	Frequency	Percent		Cumulative	Cumulative
-									Frequency	Percent	
-0			1817		62.85		1817		62.85
-1			1074		37.15		2891		100.00
+						Frequency	Percent	
+0		1817		62.85		1817		62.85
+1		1074		37.15		2891		100.00
 ;
 
 *b) 1978 patients had least 1 emergency room encounter that started in 2003 
 
 Emerg	Frequency	Percent		Cumulative	Cumulative
-								Frequency	Percent	
-0		913			31.58		913			31.58
-1		1978		68.42		2891		100.00
+					Frequency	Percent	
+0	913		31.58		913		31.58
+1	1978		68.42		2891		100.00
 ;
 
 * 2891 patients had at least 1 visit of either type (inpatient or emergency room encounter) that started in 2003
 
 Inpt_emerg	Frequency	Percent		Cumulative	Cumulative
-									Frequency	Percent	
-1			2891		100.00		2891		100.00
+						Frequency	Percent	
+1		2891		100.00		2891		100.00
 ;
 
 
 *d) This table counts for # of encounters for each patient: 
 
 count	Frequency	Percent		Cumulative	Cumulative
-								Frequency	Percent	
+					Frequency	Percent	
 								
-1		2556		88.41		2556		88.41
-2		270			9.34		2826		97.75
-3		45			1.56		2871		99.31
-4		14			0.48		2885		99.79
-5		3			0.10		2888		99.90
-6		1			0.03		2889		99.93
-7		1			0.03		2890		99.97
-12		1			0.03		2891		100.00
+1	2556		88.41		2556		88.41
+2	270		9.34		2826		97.75
+3	45		1.56		2871		99.31
+4	14		0.48		2885		99.79
+5	3		0.10		2888		99.90
+6	1		0.03		2889		99.93
+7	1		0.03		2890		99.97
+12	1		0.03		2891		100.00
 ;
 
 
